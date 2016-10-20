@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- '4.0'
+- '5.0'
+- '6.0'
+after_script: bash <(curl -s https://codecov.io/bash)
+deploy:
+  - provider: npm
+    email: tituswormer@gmail.com
+    api_key:
+      secure: UdLqoOrtw/EjBjH9K8KrGq13ueGw8Qf0xIr7xCoJvKwI9qufUMK9ef/VPFQ7ZtqMKpLfsiKTJts5FO6wDgmLqOn/wDJJq1zcJk7aDHq282zxDJe+g2QPYfj9LCU6v6MMB/dH847YIGVRYhwlPucPe7kH+IytYEm+tIaJTl64vIqt9GfEYArw9TyGldGadXbo4mpY8DPLIX/Ye9VEYvDYmDeFjync4QcD3GAEG4Vnf0hYsqaueJD8PjMUXLNMC66YrXcoJB31et7Cgb3WaPXYs/CdusvOAr+VayUF8gstHZ5RCUPeHMdMBdifw4AaE2dTeDxV1WT8A1+6qsrFMMrqO/IDJKrTWVlFqX9MTVYIxWUjRb7A+ndV8hBC1RUEVZPhAGPy0L2EtGoLLl81SQSSB0bDnQZYCBUV5UeWXL8DOXufAvy/S9rgSo+zfaTHOYBAZmnTJDzU9KS3qmkbGqmqMnh7timJQ3l6HYKPH8voYErjtnYOteFV4e6Xi9a/lurAUQhQIEZ57Hqx8nYTYJEUAcidWSOPlRSDHSTJ9YAQC3oIwwtegAvuoZC1qEGQrIDS4WzDZYy2o9eiX0DGh1+myffJdb7oDf7zEJ4sAxhXL1wPpy0jaZ7sUrubqbUXJYoCAdskwXkA00id5JkjFAfu4H6LVgygifrmvw5s838Xt7E=
+    on:
+      tags: true
+      node: '5.0'
+  - provider: releases
+    api_key:
+      secure: Lwad06S8bh3Zr/OrEy/WunUxdlPgtwMB9Q0kUTCa/p3Bq1s54G7SXJIBH7AOl2vq3Dr9vIrNzBzZhWwgR7z0ugbhnsNQHugAGrbok5kVF712hhQa5ZAHB09MPOocfPQAv+8Qx3Hz5i+J8ZCRd9Vc9xV+jpkPg3cxqCeFRWwt4+HGMOeoowQJbRAEbkmB9MAPYaHTk+8qbRzSR5zpRjR0T1Ui6PLBD2DJuFm1xut9ZnW7JjIGp9Q5ekO28dSODC1ltwFHZfPIRpYP+Rz2goY6qtBOzFQ2Br9xuOPs7y9huHfVh9CPOAgbeOepuawUpZPJcLN/21AZf6lFEeRsOrZ8tJqvoRKjhnMvGrUW+1dbcr0T56OWFQvrlUKJRHJTEOiNdMRFAR67l4OrIc/dbcxus1/NuQ8cC73kap7lKtvWOan2cF2XDKMcFzXPKQ3URzMATkbBCFFyl5w/uMS3h+ijxfZ3E1zJdFlWcHTal5Lcdbn9lbBqRORyk8aW8hVikGUcTSmnVhTQTJofx356HRDAHaF1U/2ssIQku9M/HHUp3T07NIhp+wtx6TkeDi6PZqbbNmqxbvnDwRiAYJJiNC/a4lCt+bxtGWgjos2KgKjSRd7pzwhq+S2rmFps2KxTwmKZMZB4TjJp8eOoMPSwCISIZ/R9DWq98Jcf+RVMrBhCRwk=
+    file:
+      - "rehype-raw.js"
+      - "rehype-raw.min.js"
+    on:
+      tags: true
+      node: '6.0'
