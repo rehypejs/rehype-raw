@@ -28,7 +28,6 @@ And our script, `example.js`, looks as follows:
 ```javascript
 'use strict';
 
-/* Dependencies. */
 var vfile = require('to-vfile');
 var report = require('vfile-reporter');
 var unified = require('unified');
@@ -38,7 +37,6 @@ var raw = require('rehype-raw');
 var document = require('rehype-document');
 var stringify = require('rehype-stringify');
 
-/* Process. */
 unified()
   .use(markdown)
   .use(remark2rehype, {allowDangerousHTML: true})
