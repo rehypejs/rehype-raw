@@ -28,7 +28,7 @@
     "rehype-stringify": "^2.0.0",
     "remark-cli": "^2.0.0",
     "remark-parse": "^2.0.2",
-    "remark-preset-wooorm": "^1.0.0",
+    "remark-preset-wooorm": "^2.0.0",
     "remark-rehype": "^1.1.0",
     "tape": "^4.0.0",
     "unified": "^5.1.0",
