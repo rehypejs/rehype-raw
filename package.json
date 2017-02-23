@@ -31,7 +31,7 @@
     "remark-preset-wooorm": "^1.0.0",
     "remark-rehype": "^1.1.0",
     "tape": "^4.0.0",
-    "unified": "^5.1.0",
+    "unified": "^6.0.0",
     "xo": "^0.17.0"
   },
   "scripts": {
