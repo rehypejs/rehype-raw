@@ -26,22 +26,22 @@ A mix of *markdown* and <em>HTML</em>.
 And our script, `example.js`, looks as follows:
 
 ```javascript
-'use strict';
-
 var vfile = require('to-vfile');
 var report = require('vfile-reporter');
 var unified = require('unified');
 var markdown = require('remark-parse');
 var remark2rehype = require('remark-rehype');
 var raw = require('rehype-raw');
-var document = require('rehype-document');
+var doc = require('rehype-document');
+var format = require('rehype-format');
 var stringify = require('rehype-stringify');
 
 unified()
   .use(markdown)
   .use(remark2rehype, {allowDangerousHTML: true})
   .use(raw)
-  .use(document, {title: '🙌'})
+  .use(doc, {title: '🙌'})
+  .use(format)
   .use(stringify)
   .process(vfile.readSync('example.md'), function (err, file) {
     console.error(report(err || file));
@@ -53,18 +53,18 @@ Now, running `node example` yields:
 
 ```html
 example.md: no issues found
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>🙌</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<div class="note">
-<p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
-</div>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>🙌</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="note">
+      <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
+    </div>
+  </body>
 </html>
 ```
 
