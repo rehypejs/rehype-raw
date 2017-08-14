@@ -1,6 +1,5 @@
 'use strict';
 
-/* Dependencies. */
 var test = require('tape');
 var unified = require('unified');
 var parse = require('remark-parse');
@@ -8,7 +7,6 @@ var remark2rehype = require('remark-rehype');
 var stringify = require('rehype-stringify');
 var raw = require('./');
 
-/* Tests. */
 test('integration', function (t) {
   unified()
     .use(parse)
