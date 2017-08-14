@@ -94,4 +94,4 @@ Parse the tree again, also parsing “raw” nodes (as exposed by remark).
 
 [author]: http://wooorm.com
 
-[hast]: https://github.com/wooorm/hast
+[hast]: https://github.com/syntax-tree/hast
