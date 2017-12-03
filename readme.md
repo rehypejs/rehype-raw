@@ -80,13 +80,13 @@ Parse the tree again, also parsing “raw” nodes (as exposed by remark).
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/rehype-raw.svg
+[travis-badge]: https://img.shields.io/travis/rehypejs/rehype-raw.svg
 
-[travis]: https://travis-ci.org/wooorm/rehype-raw
+[travis]: https://travis-ci.org/rehypejs/rehype-raw
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/rehype-raw.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-raw.svg
 
-[codecov]: https://codecov.io/github/wooorm/rehype-raw
+[codecov]: https://codecov.io/github/rehypejs/rehype-raw
 
 [npm]: https://docs.npmjs.com/cli/install
 

@@ -9,8 +9,8 @@
     "raw",
     "html"
   ],
-  "repository": "https://github.com/wooorm/rehype-raw",
-  "bugs": "https://github.com/wooorm/rehype-raw/issues",
+  "repository": "rehypejs/rehype-raw",
+  "bugs": "https://github.com/rehypejs/rehype-raw/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
