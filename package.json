@@ -37,7 +37,7 @@
   "scripts": {
     "build-md": "remark . -qfo",
     "build-bundle": "browserify index.js --bare -s rehypeRaw > rehype-raw.js",
-    "build-mangle": "esmangle rehype-raw.js > rehype-raw.min.js",
+    "build-mangle": "browserify index.js --bare -s rehypeRaw -p tinyify > rehype-raw.min.js",
     "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
     "lint": "xo",
     "test-api": "node test.js",
