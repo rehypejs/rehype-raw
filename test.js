@@ -5,7 +5,7 @@ var unified = require('unified');
 var parse = require('remark-parse');
 var remark2rehype = require('remark-rehype');
 var stringify = require('rehype-stringify');
-var raw = require('./');
+var raw = require('.');
 
 test('integration', function (t) {
   unified()
