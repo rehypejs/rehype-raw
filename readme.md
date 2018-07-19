@@ -26,15 +26,15 @@ A mix of *markdown* and <em>HTML</em>.
 And our script, `example.js`, looks as follows:
 
 ```javascript
-var vfile = require('to-vfile');
-var report = require('vfile-reporter');
-var unified = require('unified');
-var markdown = require('remark-parse');
-var remark2rehype = require('remark-rehype');
-var raw = require('rehype-raw');
-var doc = require('rehype-document');
-var format = require('rehype-format');
-var stringify = require('rehype-stringify');
+var vfile = require('to-vfile')
+var report = require('vfile-reporter')
+var unified = require('unified')
+var markdown = require('remark-parse')
+var remark2rehype = require('remark-rehype')
+var doc = require('rehype-document')
+var format = require('rehype-format')
+var stringify = require('rehype-stringify')
+var raw = require('rehype-raw')
 
 unified()
   .use(markdown)
@@ -43,17 +43,17 @@ unified()
   .use(doc, {title: '🙌'})
   .use(format)
   .use(stringify)
-  .process(vfile.readSync('example.md'), function (err, file) {
-    console.error(report(err || file));
-    console.log(String(file));
-  });
+  .process(vfile.readSync('example.md'), function(err, file) {
+    console.error(report(err || file))
+    console.log(String(file))
+  })
 ```
 
 Now, running `node example` yields:
 
 ```html
 example.md: no issues found
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
