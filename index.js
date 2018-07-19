@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-var util = require('hast-util-raw');
+var util = require('hast-util-raw')
 
-module.exports = raw;
+module.exports = raw
 
 function raw() {
-  return util;
+  return util
 }
