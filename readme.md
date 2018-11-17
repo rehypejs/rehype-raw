@@ -100,7 +100,7 @@ repository, organisation, or community you agree to abide by its terms.
 
 [license]: license
 
-[author]: http://wooorm.com
+[author]: https://wooorm.com
 
 [hast]: https://github.com/syntax-tree/hast
 
