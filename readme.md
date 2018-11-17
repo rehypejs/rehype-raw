@@ -1,4 +1,9 @@
-# rehype-raw [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# rehype-raw
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Chat][chat-badge]][chat]
 
 Reparse a [HAST][] tree, with support for embedded `raw`
 nodes.  Keeping positional info OK.  🙌
@@ -88,13 +93,21 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/rehypejs/rehype-raw.svg
+[build-badge]: https://img.shields.io/travis/rehypejs/rehype-raw.svg
 
-[travis]: https://travis-ci.org/rehypejs/rehype-raw
+[build]: https://travis-ci.org/rehypejs/rehype-raw
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-raw.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-v.svg
 
-[codecov]: https://codecov.io/github/rehypejs/rehype-raw
+[coverage]: https://codecov.io/github/rehypejs/rehype-raw
+
+[downloads-badge]: https://img.shields.io/npm/dm/rehype-raw.svg
+
+[downloads]: https://www.npmjs.com/package/rehype-raw
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/rehype
 
 [npm]: https://docs.npmjs.com/cli/install
 
