@@ -1,6 +1,6 @@
 {
   "name": "rehype-raw",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Reparse the tree (and raw nodes)",
   "license": "MIT",
   "keywords": [
