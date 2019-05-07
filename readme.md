@@ -16,16 +16,18 @@ nodes.  Keeping positional info OK.  🙌
 npm install rehype-raw
 ```
 
+## API
+
+### `rehype().use(raw)`
+
+Parse the tree again, also parsing “raw” nodes (as exposed by remark).
+
 ## Usage
 
 Say we have the following markdown file, `example.md`:
 
 ```markdown
-<div class="note">
-
 A mix of *markdown* and <em>HTML</em>.
-
-</div>
 ```
 
 And our script, `example.js`, looks as follows:
@@ -66,18 +68,78 @@ example.md: no issues found
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <div class="note">
-      <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
-    </div>
+    <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
   </body>
 </html>
 ```
 
-## API
+#### Caution
 
-### `rehype().use(raw)`
+_Commonmark treats any group of lines in raw HTML between a start and end
+condition as an [HTML Block](https://spec.commonmark.org/0.29/#html-blocks)._
 
-Parse the tree again, also parsing “raw” nodes (as exposed by remark).
+In accordance with these rules for, the remark parser will only process
+markdown embedded between inline html tags and in its own paragraph.
+
+Consider the following three examples:
+
+*   In _example-1_, the entire block is treated as HTML.  Consequently,
+    `*markdown*` remains unprocessed!
+
+    Markdown:
+
+    ```markdown
+    <div class="example-1">
+      A mix of *markdown* and <em>HTML</em>.
+    </div>
+    ```
+
+    HTML:
+
+    ```html
+    <div class="example-1">
+      A mix of *markdown* and <em>HTML</em>.
+    <div>
+    ```
+
+
+*   In _example-2_, the content is treated as two HTML blocks with a markdown
+    paragraph embedded between them.
+
+    Markdown:
+
+    ```markdown
+    <div class="example-2">
+
+      A mix of *markdown* and <em>HTML</em>.
+
+    </div>
+    ```
+
+    HTML:
+
+    ```html
+    <div class="example-2">
+      <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
+    <div>
+    ```
+
+*   In _example-3_ the content is treated as a markdown paragraph with inline
+    HTML.
+
+    Markdown:
+
+    ```markdown
+    <span class="example-3">A mix of *markdown* and <em>HTML</em>.</span>
+    ```
+
+    HTML:
+
+    ```html
+    <p><span class="example-3">A mix of <em>markdown</em> and <em>HTML</em>.</span></p>
+    ```
+
+For more detailed examples see the latest [Commonmark spec](https://spec.commonmark.org/current)
 
 ## Contribute
 
