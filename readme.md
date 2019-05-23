@@ -167,7 +167,7 @@ repository, organisation, or community you agree to abide by its terms.
 
 [build]: https://travis-ci.org/rehypejs/rehype-raw
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-v.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/rehypejs/rehype-raw.svg
 
 [coverage]: https://codecov.io/github/rehypejs/rehype-raw
 
