@@ -3,41 +3,46 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
+[![Size][size-badge]][size]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-Reparse a [hast][] tree, with support for embedded `raw`
-nodes.  Keeping positional info OK.  🙌
+[**rehype**][rehype] plugin to reparse the tree (and raw nodes).
+Keeping positional info OK.  🙌
 
-## Installation
+Tiny wrapper around [`hast-util-raw`][raw]
+
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install rehype-raw
 ```
 
-## Usage
+## Use
 
-Say we have the following markdown file, `example.md`:
+Say we have the following Markdown file, `example.md`:
 
 ```markdown
 <div class="note">
 
-A mix of *markdown* and <em>HTML</em>.
+A mix of *Markdown* and <em>HTML</em>.
 
 </div>
 ```
 
 And our script, `example.js`, looks as follows:
 
-```javascript
+```js
 var vfile = require('to-vfile')
 var report = require('vfile-reporter')
 var unified = require('unified')
 var markdown = require('remark-parse')
 var remark2rehype = require('remark-rehype')
 var doc = require('rehype-document')
-var format = require('rehype-format')
+var format = require('rehype-raw')
 var stringify = require('rehype-stringify')
 var raw = require('rehype-raw')
 
@@ -67,7 +72,7 @@ example.md: no issues found
   </head>
   <body>
     <div class="note">
-      <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
+      <p>A mix of <em>Markdown</em> and <em>HTML</em>.</p>
     </div>
   </body>
 </html>
@@ -77,14 +82,15 @@ example.md: no issues found
 
 ### `rehype().use(raw)`
 
-Parse the tree again, also parsing “raw” nodes (as exposed by remark).
+Parse the tree again, also parsing “raw” nodes (as exposed by
+[`remark-rehype`][remark-rehype]).
 
 ###### Note
 
-This project parses a [hast][] tree with embedded raw HTML.
+This project parses a [**hast**][hast] tree with embedded raw HTML.
 This typically occurs because we’re coming from Markdown, often parsed by
-[remark-parse][].
-Inside markdown, HTML is a black box: Markdown doesn’t know what’s inside that
+[`remark-parse`][remark-parse].
+Inside Markdown, HTML is a black box: Markdown doesn’t know what’s inside that
 HTML.
 So, when `rehype-raw` maps Markdown to HTML, it cannot understand raw embedded
 HTML.
@@ -102,7 +108,7 @@ Take the following examples:
 
     ```markdown
     <div class="note">
-    A mix of *markdown* and <em>HTML</em>.
+    A mix of *Markdown* and <em>HTML</em>.
     </div>
     ```
 
@@ -110,7 +116,7 @@ Take the following examples:
 
     ```html
     <div class="note">
-    A mix of *markdown* and <em>HTML</em>.
+    A mix of *Markdown* and <em>HTML</em>.
     <div>
     ```
 
@@ -119,31 +125,31 @@ Take the following examples:
     ```markdown
     <div class="note">
 
-    A mix of *markdown* and <em>HTML</em>.
+    A mix of *Markdown* and <em>HTML</em>.
 
     </div>
     ```
 
-    …it’s one block with the opening HTML tag, then
-    a paragraph of Markdown, and another block with closing HTML tag.
+    …it’s one block with the opening HTML tag, then a paragraph of Markdown, and
+    another block with closing HTML tag.
     That’s because of the blank lines:
 
     ```html
     <div class="note">
-    A mix of <em>markdown</em> and <em>HTML</em>.
+    A mix of <em>Markdown</em> and <em>HTML</em>.
     <div>
     ```
 
 *   This also works:
 
     ```markdown
-    <span class="note">A mix of *markdown* and <em>HTML</em>.</span>
+    <span class="note">A mix of *Markdown* and <em>HTML</em>.</span>
     ```
 
-    …Inline tags are parsed as separate tags, with markdown in between:
+    …Inline tags are parsed as separate tags, with Markdown in between:
 
     ```html
-    <p><span class="note">A mix of <em>markdown</em> and <em>HTML</em>.</span></p>
+    <p><span class="note">A mix of <em>Markdown</em> and <em>HTML</em>.</span></p>
     ```
 
     This occurs if the tag name is not included in the list of [block][] tag
@@ -151,11 +157,13 @@ Take the following examples:
 
 ## Contribute
 
-See [`contributing.md` in `rehypejs/rehype`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`rehypejs/.github`][health] for ways
+to get started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -175,22 +183,42 @@ repository, organisation, or community you agree to abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/rehype-raw
 
+[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-raw.svg
+
+[size]: https://bundlephobia.com/result?p=rehype-raw
+
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
+
 [chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/rehype
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[health]: https://github.com/rehypejs/.github
+
+[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+
+[support]: https://github.com/rehypejs/.github/blob/master/support.md
+
+[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+
 [license]: license
 
 [author]: https://wooorm.com
 
+[rehype]: https://github.com/rehypejs/rehype
+
 [hast]: https://github.com/syntax-tree/hast
+
+[raw]: https://github.com/syntax-tree/hast-util-raw
 
 [remark-parse]: https://github.com/remarkjs/remark/blob/master/packages/remark-parse
 
+[remark-rehype]: https://github.com/remarkjs/remark-rehype
+
 [block]: https://github.com/remarkjs/remark/blob/master/packages/remark-parse/lib/block-elements.js
-
-[contributing]: https://github.com/rehypejs/rehype/blob/master/contributing.md
-
-[coc]: https://github.com/rehypejs/rehype/blob/master/code-of-conduct.md
