@@ -155,6 +155,14 @@ Take the following examples:
     This occurs if the tag name is not included in the list of [block][] tag
     names.
 
+## Security
+
+Improper use of `rehype-raw` can open you up to a
+[cross-site scripting (XSS)][xss] attack.
+
+Either do not combine this plugin with user content or use
+[`rehype-sanitize`][sanitize].
+
 ## Contribute
 
 See [`contributing.md`][contributing] in [`rehypejs/.github`][health] for ways
@@ -222,3 +230,7 @@ abide by its terms.
 [remark-rehype]: https://github.com/remarkjs/remark-rehype
 
 [block]: https://github.com/remarkjs/remark/blob/master/packages/remark-parse/lib/block-elements.js
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[sanitize]: https://github.com/rehypejs/rehype-sanitize
