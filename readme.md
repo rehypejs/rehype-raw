@@ -42,7 +42,7 @@ var unified = require('unified')
 var markdown = require('remark-parse')
 var remark2rehype = require('remark-rehype')
 var doc = require('rehype-document')
-var format = require('rehype-raw')
+var format = require('rehype-format')
 var stringify = require('rehype-stringify')
 var raw = require('rehype-raw')
 
