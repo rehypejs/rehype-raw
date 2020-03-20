@@ -8,7 +8,7 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**rehype**][rehype] plugin to reparse the tree (and raw nodes).
+[**rehype**][rehype] plugin to parse the tree again (and raw nodes).
 Keeping positional info OK.  🙌
 
 Tiny wrapper around [`hast-util-raw`][raw]
@@ -169,8 +169,8 @@ See [`contributing.md`][contributing] in [`rehypejs/.github`][health] for ways
 to get started.
 See [`support.md`][support] for ways to get help.
 
-This project has a [Code of Conduct][coc].
-By interacting with this repository, organisation, or community you agree to
+This project has a [code of conduct][coc].
+By interacting with this repository, organization, or community you agree to
 abide by its terms.
 
 ## License
@@ -201,7 +201,7 @@ abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[chat-badge]: https://img.shields.io/badge/chat-spectrum-7b16ff.svg
 
 [chat]: https://spectrum.chat/unified/rehype
 
