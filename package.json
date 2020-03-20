@@ -12,6 +12,10 @@
   ],
   "repository": "rehypejs/rehype-raw",
   "bugs": "https://github.com/rehypejs/rehype-raw/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
