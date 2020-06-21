@@ -48,12 +48,12 @@ var raw = require('rehype-raw')
 
 unified()
   .use(markdown)
-  .use(remark2rehype, {allowDangerousHTML: true})
+  .use(remark2rehype, {allowDangerousHtml: true})
   .use(raw)
   .use(doc, {title: '🙌'})
   .use(format)
   .use(stringify)
-  .process(vfile.readSync('example.md'), function(err, file) {
+  .process(vfile.readSync('example.md'), function (err, file) {
     console.error(report(err || file))
     console.log(String(file))
   })

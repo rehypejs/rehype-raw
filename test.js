@@ -7,10 +7,10 @@ var remark2rehype = require('remark-rehype')
 var stringify = require('rehype-stringify')
 var raw = require('.')
 
-test('integration', function(t) {
+test('integration', function (t) {
   unified()
     .use(parse)
-    .use(remark2rehype, {allowDangerousHTML: true})
+    .use(remark2rehype, {allowDangerousHtml: true})
     .use(raw)
     .use(stringify)
     .process(
@@ -21,7 +21,7 @@ test('integration', function(t) {
         '',
         '</div>'
       ].join('\n'),
-      function(err, file) {
+      function (err, file) {
         t.ifErr(err, 'should not fail')
 
         t.equal(
