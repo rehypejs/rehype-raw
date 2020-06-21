@@ -209,11 +209,11 @@ abide by its terms.
 
 [health]: https://github.com/rehypejs/.github
 
-[contributing]: https://github.com/rehypejs/.github/blob/master/contributing.md
+[contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
 
-[support]: https://github.com/rehypejs/.github/blob/master/support.md
+[support]: https://github.com/rehypejs/.github/blob/HEAD/support.md
 
-[coc]: https://github.com/rehypejs/.github/blob/master/code-of-conduct.md
+[coc]: https://github.com/rehypejs/.github/blob/HEAD/code-of-conduct.md
 
 [license]: license
 
@@ -225,11 +225,11 @@ abide by its terms.
 
 [raw]: https://github.com/syntax-tree/hast-util-raw
 
-[remark-parse]: https://github.com/remarkjs/remark/blob/master/packages/remark-parse
+[remark-parse]: https://github.com/remarkjs/remark/blob/HEAD/packages/remark-parse
 
 [remark-rehype]: https://github.com/remarkjs/remark-rehype
 
-[block]: https://github.com/remarkjs/remark/blob/master/packages/remark-parse/lib/block-elements.js
+[block]: https://github.com/remarkjs/remark/blob/HEAD/packages/remark-parse/lib/block-elements.js
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
