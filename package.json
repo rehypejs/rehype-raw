@@ -30,24 +30,24 @@
     "hast-util-raw": "^6.0.0"
   },
   "devDependencies": {
-    "browserify": "^16.0.0",
+    "browserify": "^17.0.0",
     "dtslint": "^4.0.0",
     "nyc": "^15.0.0",
     "prettier": "^2.0.0",
     "rehype-stringify": "^8.0.0",
-    "remark-cli": "^8.0.0",
-    "remark-parse": "^8.0.0",
-    "remark-preset-wooorm": "^7.0.0",
-    "remark-rehype": "^7.0.0",
+    "remark-cli": "^9.0.0",
+    "remark-parse": "^9.0.0",
+    "remark-preset-wooorm": "^8.0.0",
+    "remark-rehype": "^8.0.0",
     "tape": "^5.0.0",
     "tinyify": "^3.0.0",
     "unified": "^9.0.0",
-    "xo": "^0.33.0"
+    "xo": "^0.36.0"
   },
   "scripts": {
-    "format": "remark . -qfo && prettier . --write && xo --fix",
-    "build-bundle": "browserify . -s rehypeRaw > rehype-raw.js",
-    "build-mangle": "browserify . -s rehypeRaw -p tinyify > rehype-raw.min.js",
+    "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
+    "build-bundle": "browserify . -s rehypeRaw -o rehype-raw.js",
+    "build-mangle": "browserify . -s rehypeRaw -o rehype-raw.min.js -p tinyify",
     "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test.js",
@@ -72,6 +72,7 @@
     "prettier": true,
     "esnext": false,
     "ignores": [
+      "types/",
       "rehype-raw.js"
     ]
   },
