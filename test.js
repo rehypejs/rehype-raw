@@ -21,8 +21,8 @@ test('integration', function (t) {
         '',
         '</div>'
       ].join('\n'),
-      function (err, file) {
-        t.ifErr(err, 'should not fail')
+      function (error, file) {
+        t.ifErr(error, 'should not fail')
 
         t.equal(
           String(file),
