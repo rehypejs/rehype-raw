@@ -27,7 +27,7 @@
     "types/index.d.ts"
   ],
   "dependencies": {
-    "hast-util-raw": "^6.0.0"
+    "hast-util-raw": "^6.1.0"
   },
   "devDependencies": {
     "browserify": "^17.0.0",

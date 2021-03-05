@@ -80,10 +80,11 @@ example.md: no issues found
 
 ## API
 
-### `rehype().use(raw)`
+### `rehype().use(raw[, options])`
 
 Parse the tree again, also parsing “raw” nodes (as exposed by
 [`remark-rehype`][remark-rehype]).
+`options` are passed to [hast-util-raw][raw].
 
 ###### Note
 
