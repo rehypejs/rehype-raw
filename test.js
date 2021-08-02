@@ -5,7 +5,7 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from './index.js'
 
-test('rehypeRaw', function (t) {
+test('rehypeRaw', (t) => {
   unified()
     .use(remarkParse)
     .use(remarkRehype, {allowDangerousHtml: true})
@@ -19,7 +19,7 @@ test('rehypeRaw', function (t) {
         '',
         '</div>'
       ].join('\n'),
-      function (error, file) {
+      (error, file) => {
         t.ifErr(error, 'should not fail')
 
         t.equal(
