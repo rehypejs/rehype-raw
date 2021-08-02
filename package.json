@@ -30,7 +30,6 @@
     "hast-util-raw": "^6.1.0"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
     "c8": "^7.0.0",
     "dtslint": "^4.0.0",
     "prettier": "^2.0.0",
@@ -40,19 +39,15 @@
     "remark-preset-wooorm": "^8.0.0",
     "remark-rehype": "^8.0.0",
     "tape": "^5.0.0",
-    "tinyify": "^3.0.0",
     "unified": "^9.0.0",
     "xo": "^0.38.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . -w --loglevel warn && xo --fix",
-    "build-bundle": "browserify . -s rehypeRaw -o rehype-raw.js",
-    "build-mangle": "browserify . -s rehypeRaw -o rehype-raw.min.js -p tinyify",
-    "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node --conditions development test.js",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test-types": "dtslint types",
-    "test": "npm run format && npm run build && npm run test-coverage && npm run test-types"
+    "test": "npm run format && npm run test-coverage && npm run test-types"
   },
   "prettier": {
     "tabWidth": 2,
@@ -66,8 +61,7 @@
     "prettier": true,
     "esnext": false,
     "ignores": [
-      "types/",
-      "rehype-raw.js"
+      "types/"
     ]
   },
   "remarkConfig": {
