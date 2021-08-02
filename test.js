@@ -1,18 +1,16 @@
-'use strict'
+import test from 'tape'
+import unified from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import rehypeRaw from './index.js'
 
-var test = require('tape')
-var unified = require('unified')
-var parse = require('remark-parse')
-var remark2rehype = require('remark-rehype')
-var stringify = require('rehype-stringify')
-var raw = require('.')
-
-test('integration', function (t) {
+test('rehypeRaw', function (t) {
   unified()
-    .use(parse)
-    .use(remark2rehype, {allowDangerousHtml: true})
-    .use(raw)
-    .use(stringify)
+    .use(remarkParse)
+    .use(remarkRehype, {allowDangerousHtml: true})
+    .use(rehypeRaw)
+    .use(rehypeStringify)
     .process(
       [
         '<div class="note">',

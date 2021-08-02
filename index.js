@@ -1,10 +1,6 @@
-'use strict'
+import hastUtilRaw from 'hast-util-raw'
 
-var hastUtilRaw = require('hast-util-raw')
-
-module.exports = rehypeRaw
-
-function rehypeRaw(options) {
+export default function rehypeRaw(options) {
   return transform
   function transform(tree, file) {
     return hastUtilRaw(tree, file, options)
