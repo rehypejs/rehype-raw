@@ -15,6 +15,9 @@ Tiny wrapper around [`hast-util-raw`][raw]
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -36,25 +39,28 @@ A mix of *Markdown* and <em>HTML</em>.
 And our script, `example.js`, looks as follows:
 
 ```js
-var vfile = require('to-vfile')
-var report = require('vfile-reporter')
-var unified = require('unified')
-var markdown = require('remark-parse')
-var remark2rehype = require('remark-rehype')
-var doc = require('rehype-document')
-var format = require('rehype-format')
-var stringify = require('rehype-stringify')
-var raw = require('rehype-raw')
+import {readSync} from 'to-vfile'
+import {reporter} from 'vfile-reporter'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeRaw from 'rehype-raw'
+import rehypeDocument from 'rehype-document'
+import rehypeFormat from 'rehype-format'
+import rehypeStringify from 'rehype-stringify'
+
+const file = readSync('example.md')
 
 unified()
-  .use(markdown)
-  .use(remark2rehype, {allowDangerousHtml: true})
-  .use(raw)
-  .use(doc, {title: '🙌'})
-  .use(format)
-  .use(stringify)
-  .process(vfile.readSync('example.md'), function (err, file) {
-    console.error(report(err || file))
+  .use(remarkParse)
+  .use(remarkRehype, {allowDangerousHtml: true})
+  .use(rehypeRaw)
+  .use(rehypeDocument, {title: '🙌'})
+  .use(rehypeFormat)
+  .use(rehypeStringify)
+  .process(file)
+  .then((file) => {
+    console.error(reporter(file))
     console.log(String(file))
   })
 ```
@@ -80,7 +86,10 @@ example.md: no issues found
 
 ## API
 
-### `rehype().use(raw[, options])`
+This package exports no identifiers.
+The default export is `rehypeRaw`.
+
+### `unified().use(rehypeRaw[, options])`
 
 Parse the tree again, also parsing “raw” nodes (as exposed by
 [`remark-rehype`][remark-rehype]).
