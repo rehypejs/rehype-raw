@@ -28,7 +28,7 @@
     "index.js"
   ],
   "dependencies": {
-    "hast-util-raw": "^6.1.0"
+    "hast-util-raw": "^7.0.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",
