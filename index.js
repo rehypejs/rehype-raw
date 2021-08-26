@@ -1,6 +1,7 @@
 /**
  * @typedef {import('hast').Root} Root
  * @typedef {import('hast-util-raw').Options} Options
+ * @typedef {import('hast-util-raw')} DoNotTouchAsThisImportIncludesRawInTree
  */
 
 import {raw} from 'hast-util-raw'
