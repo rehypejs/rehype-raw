@@ -18,7 +18,7 @@ test('rehypeRaw', (t) => {
     .use(remarkRehype, {allowDangerousHtml: true})
     .use(rehypeRaw)
     .use(
-      /** @type {import('unified').Plugin<[], Root>} */
+      /** @type {import('unified').Plugin<Array<void>, Root>} */
       () => (root) => {
         visit(root, 'raw', () => {
           t.fail('should not include `raw` in tree after `rehype-raw`')
