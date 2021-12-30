@@ -30,8 +30,8 @@ positional info okay.
 This package is a [unified][] ([rehype][]) plugin to parse a document again.
 To understand how it works, requires knowledge of ASTs (specifically, [hast][]).
 This plugin passes each node and embedded raw HTML through an HTML parser
-([`parse5`][parse5]), to recreate a tree exactly as how a browser would, while
-keeping the original data and positional info intact.
+([`parse5`][parse5]), to recreate a tree exactly as how a browser would parse
+it, while keeping the original data and positional info intact.
 
 **unified** is a project that transforms content with abstract syntax trees
 (ASTs).
@@ -42,18 +42,20 @@ This is a rehype plugin that parses the tree again.
 ## When should I use this?
 
 This plugin is particularly useful when coming from markdown and wanting to
-support HTML embedded inside that markdown (which requires
-`allowDangerousHtml: true` in `remark-rehype`).
+support HTML embedded inside that markdown (which requires passing
+`allowDangerousHtml: true` to `remark-rehype`).
 Markdown dictates how, say, a list item or emphasis can be parsed.
 We can use that to turn the markdown syntax tree into an HTML syntax tree.
 But markdown also dictates that things that look like HTML, are passed through
-untouched.
-This plugin can be used to take those strings of HTML and include them into the
-syntax tree as actual nodes instead.
+untouched, even when it just looks like XML but doesn’t really make sense, so we
+can’t normally use these strings of “HTML” to create an HTML syntax tree.
+This plugin can.
+It can be used to take those strings of HTML and include them into the syntax
+tree as actual nodes.
 
 If your final result is HTML and you trust content, then “strings” are fine
-(`rehype-stringify` has an `allowDangerousHtml` option that can be turned on to
-pass them through).
+(you can pass `allowDangerousHtml: true` to `rehype-stringify`, which passes
+HTML through untouched).
 But there are two main cases where a proper syntax tree is preferred:
 
 *   rehype plugins need a proper syntax tree as they operate on actual nodes to
