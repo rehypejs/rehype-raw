@@ -8,39 +8,103 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**rehype**][rehype] plugin to parse the tree again (and raw nodes).
-Keeping positional info OK.  🙌
+**[rehype][]** plugin to parse the tree (and raw nodes) again, keeping
+positional info okay.
 
-Tiny wrapper around [`hast-util-raw`][raw]
+## Contents
+
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`unified().use(rehypeRaw[, options])`](#unifieduserehyperaw-options)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is a [unified][] ([rehype][]) plugin to parse a document again.
+To understand how it works, requires knowledge of ASTs (specifically, [hast][]).
+This plugin passes each node and embedded raw HTML through an HTML parser
+([`parse5`][parse5]), to recreate a tree exactly as how a browser would, while
+keeping the original data and positional info intact.
+
+**unified** is a project that transforms content with abstract syntax trees
+(ASTs).
+**rehype** adds support for HTML to unified.
+**hast** is the HTML AST that rehype uses.
+This is a rehype plugin that parses the tree again.
+
+## When should I use this?
+
+This plugin is particularly useful when coming from markdown and wanting to
+support HTML embedded inside that markdown (which requires
+`allowDangerousHtml: true` in `remark-rehype`).
+Markdown dictates how, say, a list item or emphasis can be parsed.
+We can use that to turn the markdown syntax tree into an HTML syntax tree.
+But markdown also dictates that things that look like HTML, are passed through
+untouched.
+This plugin can be used to take those strings of HTML and include them into the
+syntax tree as actual nodes instead.
+
+If your final result is HTML and you trust content, then “strings” are fine
+(`rehype-stringify` has an `allowDangerousHtml` option that can be turned on to
+pass them through).
+But there are two main cases where a proper syntax tree is preferred:
+
+*   rehype plugins need a proper syntax tree as they operate on actual nodes to
+    inspect or transform things, they can’t operate on strings of HTML
+*   other output formats (React, MDX, etc) need actual nodes and can’t handle
+    strings of HTML
+
+This plugin is built on [`hast-util-raw`][hast-util-raw], which does the work on
+syntax trees.
+rehype focusses on making it easier to transform content by abstracting such
+internals away.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install rehype-raw
 ```
 
+In Deno with [Skypack][]:
+
+```js
+import rehypeRaw from 'https://cdn.skypack.dev/rehype-raw@6?dts'
+```
+
+In browsers with [Skypack][]:
+
+```html
+<script type="module">
+  import rehypeRaw from 'https://cdn.skypack.dev/rehype-raw@6?min'
+</script>
+```
+
 ## Use
 
-Say we have the following Markdown file, `example.md`:
+Say we have the following markdown file `example.md`:
 
 ```markdown
 <div class="note">
 
-A mix of *Markdown* and <em>HTML</em>.
+A mix of *markdown* and <em>HTML</em>.
 
 </div>
 ```
 
-And our script, `example.js`, looks as follows:
+And our module `example.js` looks as follows:
 
 ```js
-import {readSync} from 'to-vfile'
-import {reporter} from 'vfile-reporter'
+import {read} from 'to-vfile'
 import {unified} from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
@@ -49,26 +113,25 @@ import rehypeDocument from 'rehype-document'
 import rehypeFormat from 'rehype-format'
 import rehypeStringify from 'rehype-stringify'
 
-const file = readSync('example.md')
+main()
 
-unified()
-  .use(remarkParse)
-  .use(remarkRehype, {allowDangerousHtml: true})
-  .use(rehypeRaw)
-  .use(rehypeDocument, {title: '🙌'})
-  .use(rehypeFormat)
-  .use(rehypeStringify)
-  .process(file)
-  .then((file) => {
-    console.error(reporter(file))
-    console.log(String(file))
-  })
+async function main() {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkRehype, {allowDangerousHtml: true})
+    .use(rehypeRaw)
+    .use(rehypeDocument, {title: '🙌'})
+    .use(rehypeFormat)
+    .use(rehypeStringify)
+    .process(await read('example.md'))
+
+  console.log(String(file))
+}
 ```
 
-Now, running `node example` yields:
+Now running `node example.js` yields:
 
 ```html
-example.md: no issues found
 <!doctype html>
 <html lang="en">
   <head>
@@ -78,7 +141,7 @@ example.md: no issues found
   </head>
   <body>
     <div class="note">
-      <p>A mix of <em>Markdown</em> and <em>HTML</em>.</p>
+      <p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
     </div>
   </body>
 </html>
@@ -91,87 +154,38 @@ The default export is `rehypeRaw`.
 
 ### `unified().use(rehypeRaw[, options])`
 
-Parse the tree again, also parsing “raw” nodes (as exposed by
-[`remark-rehype`][remark-rehype]).
-`options` are passed to [hast-util-raw][raw].
+Parse the tree (and raw nodes) again, keeping positional info okay.
 
-###### Note
+##### `options`
 
-This project parses a [**hast**][hast] tree with embedded raw HTML.
-This typically occurs because we’re coming from Markdown, often parsed by
-[`remark-parse`][remark-parse].
-Inside Markdown, HTML is a black box: Markdown doesn’t know what’s inside that
-HTML.
-So, when `rehype-raw` maps Markdown to HTML, it cannot understand raw embedded
-HTML.
+Configuration (optional).
 
-That’s where this project comes in.
+###### `options.passThrough`
 
-But, Markdown is much terser than HTML, so it’s often preferred to use Markdown,
-in HTML, inside Markdown.
-As can be seen in the above example.
+This option is a bit advanced as it requires knowledge of ASTs, so we defer
+to the documentation available in [`hast-util-raw`][hast-util-raw].
 
-However, Markdown can only be mixed with HTML in some cases.
-Take the following examples:
+## Types
 
-*   **Warning**: does not work:
+This package is fully typed with [TypeScript][].
+It exports an `Options` type, which specifies the interface of the accepted
+options.
 
-    ```markdown
-    <div class="note">
-    A mix of *Markdown* and <em>HTML</em>.
-    </div>
-    ```
+## Compatibility
 
-    …this is seen as one big block of HTML:
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
 
-    ```html
-    <div class="note">
-    A mix of *Markdown* and <em>HTML</em>.
-    <div>
-    ```
-
-*   This does work:
-
-    ```markdown
-    <div class="note">
-
-    A mix of *Markdown* and <em>HTML</em>.
-
-    </div>
-    ```
-
-    …it’s one block with the opening HTML tag, then a paragraph of Markdown, and
-    another block with closing HTML tag.
-    That’s because of the blank lines:
-
-    ```html
-    <div class="note">
-    A mix of <em>Markdown</em> and <em>HTML</em>.
-    <div>
-    ```
-
-*   This also works:
-
-    ```markdown
-    <span class="note">A mix of *Markdown* and <em>HTML</em>.</span>
-    ```
-
-    …Inline tags are parsed as separate tags, with Markdown in between:
-
-    ```html
-    <p><span class="note">A mix of <em>Markdown</em> and <em>HTML</em>.</span></p>
-    ```
-
-    This occurs if the tag name is not included in the list of [block][] tag
-    names.
+This plugin works with `rehype-parse` version 1+, `rehype-stringify` version 1+,
+`rehype` version 1+, and `unified` version 4+.
 
 ## Security
 
-Improper use of `rehype-raw` can open you up to a
-[cross-site scripting (XSS)][xss] attack.
-
-Either do not combine this plugin with user content or use
-[`rehype-sanitize`][sanitize].
+The `allowDangerousHtml` option in `remark-rehype` is dangerous, so defer
+to that plugin on how to make it safe.
+Otherwise, this plugin is safe.
 
 ## Contribute
 
@@ -217,6 +231,8 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[skypack]: https://www.skypack.dev
+
 [health]: https://github.com/rehypejs/.github
 
 [contributing]: https://github.com/rehypejs/.github/blob/HEAD/contributing.md
@@ -229,18 +245,14 @@ abide by its terms.
 
 [author]: https://wooorm.com
 
+[typescript]: https://www.typescriptlang.org
+
+[unified]: https://github.com/unifiedjs/unified
+
 [rehype]: https://github.com/rehypejs/rehype
 
 [hast]: https://github.com/syntax-tree/hast
 
-[raw]: https://github.com/syntax-tree/hast-util-raw
+[hast-util-raw]: https://github.com/syntax-tree/hast-util-raw
 
-[remark-parse]: https://github.com/remarkjs/remark/blob/HEAD/packages/remark-parse
-
-[remark-rehype]: https://github.com/remarkjs/remark-rehype
-
-[block]: https://github.com/remarkjs/remark/blob/HEAD/packages/remark-parse/lib/block-elements.js
-
-[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
-
-[sanitize]: https://github.com/rehypejs/rehype-sanitize
+[parse5]: https://github.com/inikulin/parse5
