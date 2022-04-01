@@ -77,17 +77,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install rehype-raw
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeRaw from 'https://cdn.skypack.dev/rehype-raw@6?dts'
+import rehypeRaw from 'https://esm.sh/rehype-raw@6'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeRaw from 'https://cdn.skypack.dev/rehype-raw@6?min'
+  import rehypeRaw from 'https://esm.sh/rehype-raw@6?bundle'
 </script>
 ```
 
@@ -233,7 +233,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [health]: https://github.com/rehypejs/.github
 
