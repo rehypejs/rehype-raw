@@ -2,8 +2,8 @@
  * @typedef {import('hast').Root} Root
  */
 
-import {test} from 'node:test'
-import {equal, ifError, fail} from 'node:assert/strict'
+import test from 'node:test'
+import assert from 'node:assert/strict'
 import {unified} from 'unified'
 import {visit} from 'unist-util-visit'
 import remarkParse from 'remark-parse'
@@ -20,7 +20,7 @@ test('rehypeRaw', () => {
       /** @type {import('unified').Plugin<Array<void>, Root>} */
       () => (root) => {
         visit(root, 'raw', () => {
-          fail('should not include `raw` in tree after `rehype-raw`')
+          assert.fail('should not include `raw` in tree after `rehype-raw`')
         })
       }
     )
@@ -34,9 +34,9 @@ test('rehypeRaw', () => {
         '</div>'
       ].join('\n'),
       (error, file) => {
-        ifError(error)
+        assert.ifError(error)
 
-        equal(
+        assert.equal(
           String(file),
           [
             '<div class="note">',
