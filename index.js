@@ -15,7 +15,7 @@ import {raw} from 'hast-util-raw'
 export default function rehypeRaw(options = {}) {
   return (tree, file) => {
     // Assume that when a root was given, it’s also returned.
-    const result = /** @type {Root} */ (raw(tree, file, options))
+    const result = /** @type {Root} */ (raw(tree, {...options, file}))
     return result
   }
 }

@@ -2,7 +2,8 @@
  * @typedef {import('hast').Root} Root
  */
 
-import test from 'tape'
+import {test} from 'node:test'
+import {equal, ifError, fail} from 'node:assert/strict'
 import {unified} from 'unified'
 import {visit} from 'unist-util-visit'
 import remarkParse from 'remark-parse'
@@ -10,9 +11,7 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from './index.js'
 
-test('rehypeRaw', (t) => {
-  t.plan(2)
-
+test('rehypeRaw', () => {
   unified()
     .use(remarkParse)
     .use(remarkRehype, {allowDangerousHtml: true})
@@ -21,7 +20,7 @@ test('rehypeRaw', (t) => {
       /** @type {import('unified').Plugin<Array<void>, Root>} */
       () => (root) => {
         visit(root, 'raw', () => {
-          t.fail('should not include `raw` in tree after `rehype-raw`')
+          fail('should not include `raw` in tree after `rehype-raw`')
         })
       }
     )
@@ -35,9 +34,9 @@ test('rehypeRaw', (t) => {
         '</div>'
       ].join('\n'),
       (error, file) => {
-        t.ifErr(error, 'should not fail')
+        ifError(error)
 
-        t.equal(
+        equal(
           String(file),
           [
             '<div class="note">',
