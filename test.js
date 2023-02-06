@@ -11,8 +11,18 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import rehypeRaw from './index.js'
 
-test('rehypeRaw', () => {
-  unified()
+const markdown = `<div class="note">
+
+A mix of *markdown* and <em>HTML</em>.
+
+</div>`
+
+const html = `<div class="note">
+<p>A mix of <em>markdown</em> and <em>HTML</em>.</p>
+</div>`
+
+test('rehypeRaw', async () => {
+  const file = await unified()
     .use(remarkParse)
     .use(remarkRehype, {allowDangerousHtml: true})
     .use(rehypeRaw)
@@ -25,26 +35,7 @@ test('rehypeRaw', () => {
       }
     )
     .use(rehypeStringify)
-    .process(
-      [
-        '<div class="note">',
-        '',
-        'A mix of *markdown* and <em>HTML</em>.',
-        '',
-        '</div>'
-      ].join('\n'),
-      (error, file) => {
-        assert.ifError(error)
+    .process(markdown)
 
-        assert.equal(
-          String(file),
-          [
-            '<div class="note">',
-            '<p>A mix of <em>markdown</em> and <em>HTML</em>.</p>',
-            '</div>'
-          ].join('\n'),
-          'should equal the fixture'
-        )
-      }
-    )
+  assert.equal(String(file), html, 'should equal the fixture')
 })
