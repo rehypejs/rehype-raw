@@ -31,7 +31,7 @@
   ],
   "dependencies": {
     "@types/hast": "^2.0.0",
-    "hast-util-raw": "^7.2.0",
+    "hast-util-raw": "^9.0.0",
     "unified": "^10.0.0"
   },
   "devDependencies": {
