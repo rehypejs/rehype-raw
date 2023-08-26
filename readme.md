@@ -81,14 +81,14 @@ npm install rehype-raw
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import rehypeRaw from 'https://esm.sh/rehype-raw@6'
+import rehypeRaw from 'https://esm.sh/rehype-raw@7'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import rehypeRaw from 'https://esm.sh/rehype-raw@6?bundle'
+  import rehypeRaw from 'https://esm.sh/rehype-raw@7?bundle'
 </script>
 ```
 
