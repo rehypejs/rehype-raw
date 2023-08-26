@@ -190,8 +190,8 @@ versions of Node.js.
 
 When we cut a new major release, we drop support for unmaintained versions of
 Node.
-This means we try to keep the current release line, `rehype-raw@^6`, compatible
-with Node.js 12.
+This means we try to keep the current release line, `rehype-raw@^7`, compatible
+with Node.js 16.
 
 ## Security
 
