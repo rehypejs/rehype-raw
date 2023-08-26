@@ -19,6 +19,7 @@ positional info okay.
 *   [Use](#use)
 *   [API](#api)
     *   [`unified().use(rehypeRaw[, options])`](#unifieduserehyperaw-options)
+    *   [`Options`](#options)
 *   [Types](#types)
 *   [Compatibility](#compatibility)
 *   [Security](#security)
@@ -70,8 +71,8 @@ internals away.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
+This package is [ESM only][esm].
+In Node.js (version 16+), install with [npm][]:
 
 ```sh
 npm install rehype-raw
@@ -106,14 +107,14 @@ A mix of *markdown* and <em>HTML</em>.
 …and our module `example.js` looks as follows:
 
 ```js
-import {read} from 'to-vfile'
-import {unified} from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import rehypeRaw from 'rehype-raw'
 import rehypeDocument from 'rehype-document'
 import rehypeFormat from 'rehype-format'
+import rehypeRaw from 'rehype-raw'
 import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import {read} from 'to-vfile'
+import {unified} from 'unified'
 
 const file = await unified()
   .use(remarkParse)
@@ -148,41 +149,54 @@ console.log(String(file))
 ## API
 
 This package exports no identifiers.
-The default export is `rehypeRaw`.
+The default export is [`rehypeRaw`][api-rehype-raw].
 
 ### `unified().use(rehypeRaw[, options])`
 
 Parse the tree (and raw nodes) again, keeping positional info okay.
 
-##### `options`
+###### Parameters
 
-Configuration (optional).
+*   `options` ([`Options`][api-options], optional)
+    — configuration
 
-###### `options.passThrough`
+###### Returns
 
-This option is a bit advanced as it requires knowledge of ASTs, so we defer
-to the documentation available in [`hast-util-raw`][hast-util-raw].
+Transform ([`Transformer`][transformer]).
+
+### `Options`
+
+Configuration (TypeScript type).
+
+###### Fields
+
+*   `passThrough` (`Array<string>`, default: `[]`)
+    — list of custom hast node types to pass through (as in, keep); this option
+    is a bit advanced as it requires knowledge of ASTs, so we defer to the docs
+    in [`hast-util-raw`][hast-util-raw]
 
 ## Types
 
 This package is fully typed with [TypeScript][].
-It exports an `Options` type, which specifies the interface of the accepted
-options.
+It exports the additional type [`Options`][api-options].
+
+The `Raw` node type is registered by and exposed from
+[`remark-rehype`][remark-rehype].
 
 ## Compatibility
 
-Projects maintained by the unified collective are compatible with all maintained
+Projects maintained by the unified collective are compatible with maintained
 versions of Node.js.
-As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
-Our projects sometimes work with older versions, but this is not guaranteed.
 
-This plugin works with `rehype-parse` version 1+, `rehype-stringify` version 1+,
-`rehype` version 1+, and `unified` version 4+.
+When we cut a new major release, we drop support for unmaintained versions of
+Node.
+This means we try to keep the current release line, `rehype-raw@^6`, compatible
+with Node.js 12.
 
 ## Security
 
-The `allowDangerousHtml` option in `remark-rehype` is dangerous, so defer
-to that plugin on how to make it safe.
+The `allowDangerousHtml` option in [`remark-rehype`][remark-rehype] is
+dangerous, so see that plugin on how to make it safe.
 Otherwise, this plugin is safe.
 
 ## Contribute
@@ -213,9 +227,9 @@ abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/rehype-raw
 
-[size-badge]: https://img.shields.io/bundlephobia/minzip/rehype-raw.svg
+[size-badge]: https://img.shields.io/bundlejs/size/rehype-raw
 
-[size]: https://bundlephobia.com/result?p=rehype-raw
+[size]: https://bundlejs.com/?q=rehype-raw
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -228,6 +242,8 @@ abide by its terms.
 [chat]: https://github.com/rehypejs/rehype/discussions
 
 [npm]: https://docs.npmjs.com/cli/install
+
+[esm]: https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 [esmsh]: https://esm.sh
 
@@ -245,12 +261,20 @@ abide by its terms.
 
 [typescript]: https://www.typescriptlang.org
 
+[parse5]: https://github.com/inikulin/parse5
+
 [unified]: https://github.com/unifiedjs/unified
 
-[rehype]: https://github.com/rehypejs/rehype
+[transformer]: https://github.com/unifiedjs/unified?tab=readme-ov-file#transformer
 
 [hast]: https://github.com/syntax-tree/hast
 
 [hast-util-raw]: https://github.com/syntax-tree/hast-util-raw
 
-[parse5]: https://github.com/inikulin/parse5
+[rehype]: https://github.com/rehypejs/rehype
+
+[remark-rehype]: https://github.com/remarkjs/remark-rehype
+
+[api-options]: #options
+
+[api-rehype-raw]: #unifieduserehyperaw-options
