@@ -9,11 +9,11 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import {unified} from 'unified'
 import {visit} from 'unist-util-visit'
-import rehypeRaw from './index.js'
+import rehypeRaw from 'rehype-raw'
 
 test('rehypeRaw', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), [
+    assert.deepEqual(Object.keys(await import('rehype-raw')).sort(), [
       'default'
     ])
   })
