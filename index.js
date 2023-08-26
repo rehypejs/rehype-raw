@@ -1,7 +1,11 @@
 /**
  * @typedef {import('hast').Root} Root
- * @typedef {import('hast-util-raw').Options} Options
+ * @typedef {import('hast-util-raw').Options} RawOptions
  * @typedef {import('hast-util-raw')} DoNotTouchAsThisImportIncludesRawInTree
+ */
+
+/**
+ * @typedef {Omit<RawOptions, 'file'>} Options
  */
 
 import {raw} from 'hast-util-raw'
@@ -15,7 +19,7 @@ import {raw} from 'hast-util-raw'
 export default function rehypeRaw(options = {}) {
   return (tree, file) => {
     // Assume that when a root was given, it’s also returned.
-    const result = /** @type {Root} */ (raw(tree, file, options))
+    const result = /** @type {Root} */ (raw(tree, {...options, file}))
     return result
   }
 }

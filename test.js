@@ -23,7 +23,9 @@ const html = `<div class="note">
 
 test('rehypeRaw', async () => {
   const file = await unified()
+    // @ts-expect-error: to do: remove when remark is released.
     .use(remarkParse)
+    // @ts-expect-error: to do: remove when remark-rehype is released.
     .use(remarkRehype, {allowDangerousHtml: true})
     .use(rehypeRaw)
     .use(
