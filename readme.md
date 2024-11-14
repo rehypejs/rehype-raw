@@ -13,18 +13,18 @@ positional info okay.
 
 ## Contents
 
-*   [What is this?](#what-is-this)
-*   [When should I use this?](#when-should-i-use-this)
-*   [Install](#install)
-*   [Use](#use)
-*   [API](#api)
-    *   [`unified().use(rehypeRaw[, options])`](#unifieduserehyperaw-options)
-    *   [`Options`](#options)
-*   [Types](#types)
-*   [Compatibility](#compatibility)
-*   [Security](#security)
-*   [Contribute](#contribute)
-*   [License](#license)
+* [What is this?](#what-is-this)
+* [When should I use this?](#when-should-i-use-this)
+* [Install](#install)
+* [Use](#use)
+* [API](#api)
+  * [`unified().use(rehypeRaw[, options])`](#unifieduserehyperaw-options)
+  * [`Options`](#options)
+* [Types](#types)
+* [Compatibility](#compatibility)
+* [Security](#security)
+* [Contribute](#contribute)
+* [License](#license)
 
 ## What is this?
 
@@ -59,10 +59,10 @@ If your final result is HTML and you trust content, then “strings” are fine
 HTML through untouched).
 But there are two main cases where a proper syntax tree is preferred:
 
-*   rehype plugins need a proper syntax tree as they operate on actual nodes to
-    inspect or transform things, they can’t operate on strings of HTML
-*   other output formats (React, MDX, etc) need actual nodes and can’t handle
-    strings of HTML
+* rehype plugins need a proper syntax tree as they operate on actual nodes to
+  inspect or transform things, they can’t operate on strings of HTML
+* other output formats (React, MDX, etc) need actual nodes and can’t handle
+  strings of HTML
 
 This plugin is built on [`hast-util-raw`][hast-util-raw], which does the work on
 syntax trees.
@@ -157,8 +157,8 @@ Parse the tree (and raw nodes) again, keeping positional info okay.
 
 ###### Parameters
 
-*   `options` ([`Options`][api-options], optional)
-    — configuration
+* `options` ([`Options`][api-options], optional)
+  — configuration
 
 ###### Returns
 
@@ -170,10 +170,10 @@ Configuration (TypeScript type).
 
 ###### Fields
 
-*   `passThrough` (`Array<string>`, default: `[]`)
-    — list of custom hast node types to pass through (as in, keep); this option
-    is a bit advanced as it requires knowledge of ASTs, so we defer to the docs
-    in [`hast-util-raw`][hast-util-raw]
+* `passThrough` (`Array<string>`, default: `[]`)
+  — list of custom hast node types to pass through (as in, keep); this option
+  is a bit advanced as it requires knowledge of ASTs, so we defer to the docs
+  in [`hast-util-raw`][hast-util-raw]
 
 ## Types
 
