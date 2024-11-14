@@ -46,4 +46,15 @@ A mix of *markdown* and <em>HTML</em>.
 </div>`
     )
   })
+
+  await t.test('tagfilter', async function () {
+    const file = await unified()
+      .use(remarkParse)
+      .use(remarkRehype, {allowDangerousHtml: true})
+      .use(rehypeRaw, {tagfilter: true})
+      .use(rehypeStringify)
+      .process('<script>alert(1)</script>')
+
+    assert.equal(String(file), '&#x3C;script>alert(1)&#x3C;/script>')
+  })
 })

@@ -174,6 +174,17 @@ Configuration (TypeScript type).
   — list of custom hast node types to pass through (as in, keep); this option
   is a bit advanced as it requires knowledge of ASTs, so we defer to the docs
   in [`hast-util-raw`][hast-util-raw]
+* `tagfilter?` (`boolean | null | undefined`)
+  — whether to disallow irregular tags in `raw` nodes according to GFM
+  tagfilter (default: `false`);
+  this affects the following tags,
+  grouped by their kind:
+  `RAWTEXT` (`iframe`, `noembed`, `noframes`, `style`, `xmp`),
+  `RCDATA` (`textarea`, `title`),
+  `SCRIPT_DATA` (`script`),
+  `PLAINTEXT` (`plaintext`);
+  when you know that you do not want authors to write these tags,
+  you can enable this option to prevent their use from running amok.
 
 ## Types
 
