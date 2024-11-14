@@ -1,39 +1,15 @@
 {
-  "name": "rehype-raw",
-  "version": "7.0.0",
-  "description": "rehype plugin to reparse the tree (and raw nodes)",
-  "license": "MIT",
-  "keywords": [
-    "html",
-    "plugin",
-    "raw",
-    "rehype",
-    "rehype-plugin",
-    "unified"
-  ],
-  "repository": "rehypejs/rehype-raw",
-  "bugs": "https://github.com/rehypejs/rehype-raw/issues",
-  "funding": {
-    "type": "opencollective",
-    "url": "https://opencollective.com/unified"
-  },
   "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "bugs": "https://github.com/rehypejs/rehype-raw/issues",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
-  ],
-  "sideEffects": false,
-  "type": "module",
-  "exports": "./index.js",
-  "files": [
-    "lib/",
-    "index.d.ts",
-    "index.js"
   ],
   "dependencies": {
     "@types/hast": "^3.0.0",
     "hast-util-raw": "^9.0.0",
     "vfile": "^6.0.0"
   },
+  "description": "rehype plugin to reparse the tree (and raw nodes)",
   "devDependencies": {
     "@types/node": "^22.0.0",
     "c8": "^10.0.0",
@@ -49,14 +25,26 @@
     "unist-util-visit": "^5.0.0",
     "xo": "^0.59.0"
   },
-  "scripts": {
-    "build": "tsc --build --clean && tsc --build && type-coverage",
-    "format": "remark . --frail --output --quiet && prettier . --log-level warn --write && xo --fix",
-    "prepack": "npm run build && npm run format",
-    "test": "npm run build && npm run format && npm run test-coverage",
-    "test-api": "node --conditions development test.js",
-    "test-coverage": "c8 --100 --check-coverage --reporter lcov npm run test-api"
+  "exports": "./index.js",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "lib/"
+  ],
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
   },
+  "keywords": [
+    "html",
+    "plugin",
+    "raw",
+    "rehype-plugin",
+    "rehype",
+    "unified"
+  ],
+  "license": "MIT",
+  "name": "rehype-raw",
   "prettier": {
     "bracketSpacing": false,
     "singleQuote": true,
@@ -65,17 +53,28 @@
     "trailingComma": "none",
     "useTabs": false
   },
+  "version": "7.0.0",
   "remarkConfig": {
     "plugins": [
       "remark-preset-wooorm"
     ]
   },
+  "repository": "rehypejs/rehype-raw",
+  "scripts": {
+    "build": "tsc --build --clean && tsc --build && type-coverage",
+    "format": "remark --frail --output --quiet -- . && prettier --log-level warn --write -- . && xo --fix",
+    "test": "npm run build && npm run format && npm run test-coverage",
+    "test-api": "node --conditions development test.js",
+    "test-coverage": "c8 --100 --reporter lcov -- npm run test-api"
+  },
+  "sideEffects": false,
   "typeCoverage": {
     "atLeast": 100,
     "detail": true,
     "ignoreCatch": true,
     "strict": true
   },
+  "type": "module",
   "xo": {
     "prettier": true
   }
